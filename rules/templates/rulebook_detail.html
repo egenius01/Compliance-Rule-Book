@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block styles1 %}
+    <link rel="stylesheet" href='{% static "css/skel.css"%}'/>
+    <link rel="stylesheet" href='{% static "css/style.css" %}'/>
+    <link rel="stylesheet" href='{% static "css/style-xlarge.css" %}' />
+{% endblock styles1 %}
+
+{%block div%}
+	{%block body%}
+	<body class="landing" style = "background-color: rgb(51,51,51);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		color: #ffffff;
+		text-align: center;"
+	>
+	{%endblock body%}
+
+
+	{%block content%}
+
+			<div id="banner" style="padding-top:4rem">
+                <h2>Rule Detail</h2>
+                {% if user.is_authenticated %}
+                <p class="lead"> This is  {{rule_list.returns | title}} in {{rule_list.section}} of the {{rule_list.category}},<br /> <br />
+                    {{rule_list.Responsible_Officer|title}} is meant to upload Proof of compliance for {{rule_list.owner|title}} to authenticate.</p>
+                <p class="lead">Department: {{rule_list.department|title}}</p>
+
+                <p class="lead">Sanctions: {{rule_list.sanctions|title}}</p>
+            </div>
+				{%endif%}
+			</section>
+
+{%endblock content%}
+
+{%endblock div%}

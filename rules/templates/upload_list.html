@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles1 %}
+    <link rel="stylesheet" href='{% static "css/skel.css"%}'/>
+    <link rel="stylesheet" href='{% static "css/style.css" %}'/>
+    <link rel="stylesheet" href='{% static "css/style-xlarge.css" %}' />
+    <link rel="stylesheet" href='{% static "css/font-awesome.min.css" %}' />
+{% endblock styles1 %}
+
+{% load crispy_forms_tags %}
+{% block title %} Uploads {% endblock %}
+
+{% block content %}
+
+<p>
+    <a href="{% url 'upload' %}" class="btn btn-success">Upload</a>
+
+    <a type="button" class="btn btn-secondary" data-toggle = "modal" data-target="#search">Filter Rules</a>
+</p>
+<br />
+{% if user.is_authenticated %}
+<div class="row">
+    <div class=" col-md-3 m-3">
+{%if user.is_staff%}
+
+        <div class="jumbotron bg-dark text-white p-3">
+         <h1 class="mb-0 ">Unapproved Uploads</h1>
+            <br />
+            {%for each in uploads%}
+        <div>
+            <p class="lead m-0"> Return: {{each.returns}}</p>
+            <p>Staff: {{each.posted_by}}<br>
+            Published Date: {{each.published_date}}<br />
+            <a href="{{upload.images.url}}" class = "btn btn-secondary btn-sm" target="_blank">
+                View
+            </a>
+            </p>
+        </div>
+        {%empty%}
+        <div>
+            <i class="  icon fa fa-check-square fa-5x ml-5 card-title" style="color:green;"></i>
+        </div>
+        {%endfor%}
+
+        {%if uploads.has_other_pages %}
+            <ul class="center pagination pagination-sm">
+                {% if uploads.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ uploads.previous_page_number }}">
+                            <span>&laquo;</span>
+                        </a>
+                    </li>
+                {%else%}
+                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                {%endif%}
+                {%for i in uploads.paginator.page_range%}
+                    {%if uploads.number == i %}
+                    <li class="page-item active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {%else%}
+                        <li ><a class="page-link" href="?page={{i}}">{{ i }}</a></li>
+                    {%endif%}
+                {%endfor%}
+                {% if uploads.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ uploads.next_page_number }}">&raquo;</a></li>
+                {%else%}
+                    <li class="page-item disabled"><span>&raquo;</span></li>
+                {%endif%}
+            </ul>
+        {%endif%}
+        </div>
+        {%else%}
+        <div class="card alert alert-danger"><h2  class="lead">You can only see unapproved uploads as an admin</h2></div>
+    {%endif%}
+
+    </div>
+    <div class="card text-white bg-dark col-lg-8">
+        <div class="card-header">
+            Approved Uploads
+        </div>
+        <div class="card-body">
+
+        <br>
+
+        {% for upload in filter.qs %}
+        <div class="container-fluid">
+        <ul>
+            <li class="media">
+                <div class="mr-3">
+                    <img src="{{upload.images.url}}"  alt="#" style="max-width:100%; height:150pX;">
+                    <br /><br />
+                    <a href="{{upload.images.url}}" class = "btn btn-success btn-sm" target="_blank">
+                    Download
+                    </a><br />
+                    <small>to download images, right click the enlarged version of the image<br> and click save image.</small>
+                </div>
+                <div class="media-body">
+                    <h3 class="mt-0- mb-1 mr-5">{{upload.returns | upper}}</h3>
+                </div>
+                <div>
+                    <p class="lead">{{upload.description | capfirst}} <br /> <br /> uploaded by {{upload.posted_by | title}} on {{ upload.published_date|date:"D d M Y" }} by
+                        {{ upload.published_date|time:"H:i:s e" }}</p>
+                </div>
+            </li>
+            <br /> <br />
+            </ul>
+
+        </div>
+        {%empty%}
+            <div>
+                <div class="alert alert-success m-2 text-center" id="msg"> <i class="fa fa-spinner fa-spin fa-fw fa-3x fa-fw" style="color:green;"></i>
+ Sorry! Nothing to Show, try more streamlined Filter parameters</div>
+            </div>
+        {%endfor%}
+        {%else%}
+        <div class="alert alert-danger">
+            <h1>YOU ARE NOT LOGGED IN. LOG IN TO AUTHENTICATE</h1>
+    </div>
+
+       </div>
+    </div>
+    </div>
+{%endif%}
+<div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="search2" style="color:black;">Filter Rules</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <div class="modal-body">
+              <div class="card text-white bg-dark col-md-12">
+                <form  method="get" >
+                    {{filter.form|crispy}}
+                    <button class="btn btn-success" type="submit">Filter</button>
+                </form>
+              </div>
+          </div>
+
+          </div>
+        </div>
+    </div>
+
+{% endblock content%}

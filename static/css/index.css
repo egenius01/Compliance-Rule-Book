@@ -1,0 +1,29 @@
+body{
+  font-family: "Lato", sans-serif;
+  color: white;
+}
+.caption{
+    margin-top: 15%;
+}
+.caption h1 {
+  font-size: 3.8rem;
+  font-weight: 700;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.1rem 0.1rem 0.8rem black;
+  padding-bottom: 1rem;
+}
+.caption h3 {
+  font-size: 2rem;
+  text-shadow: 0.2rem 0.2rem 0.5rem black;
+  padding-bottom: 1.6rem;
+}
+
+.btn-lg {
+  border-width: medium;
+  border-radius: 0;
+  padding: 0.6rem 1.3rem;
+}
+
+.login_button2{
+margin-top:3% !important;
+}

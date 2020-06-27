@@ -1,0 +1,22 @@
+{%extends 'base.html' %}
+{% block content %}
+<table>
+    <tr>
+      <th>Title</th>
+      <th>Reference number</th>
+      <th>Date of Issuance</th>
+      <th>Theme</th>
+      <th>Description</th>
+      <th>Remark/Reference</th>
+      <th></th>
+    </tr>
+    <tr>
+        <td>{{object.title}}</td>
+        <td>{{object.reference_number}}</td>
+        <td>{{object.date_of_issuance}}</td>
+        <td>{{object.theme}}</td>
+        <td>{{object.Description}}</td>
+        <td>{{object.Remark}}</td>
+    </tr>
+</table>
+{% endblock %}

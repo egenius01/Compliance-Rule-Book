@@ -1,0 +1,9 @@
+[2019-12-31 11:42:58,569: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2019-12-31 11:42:58,586: INFO/MainProcess] mingle: searching for neighbors
+[2019-12-31 11:43:38,498: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2019-12-31 11:43:38,518: INFO/MainProcess] mingle: searching for neighbors
+[2019-12-31 11:43:39,565: INFO/MainProcess] mingle: all alone
+[2019-12-31 11:43:39,587: WARNING/MainProcess] /home/baggins/PycharmProjects/Django_project/venv/lib/python3.6/site-packages/celery/fixups/django.py:203: UserWarning: Using settings.DEBUG leads to a memory
+            leak, never use this setting in production environments!
+  leak, never use this setting in production environments!''')
+[2019-12-31 11:43:39,588: INFO/MainProcess] w1@reversegenius ready.

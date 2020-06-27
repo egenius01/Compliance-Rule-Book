@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block styles1 %}
+    <link rel="stylesheet" href='{% static "css/skel.css"%}'/>
+    <link rel="stylesheet" href='{% static "css/style.css" %}'/>
+    <link rel="stylesheet" href='{% static "css/style-xlarge.css" %}' />
+{% endblock styles1 %}
+
+{%block div%}
+	{%block body%}
+	<body class="landing" style = "background: url('{% static "img/overlay.png"%}'), url('{% static "img/banner.jpg" %}');
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		color: #ffffff;
+		text-align: center;"
+	>
+	{%endblock body%}
+
+{%block nav%}  {%endblock nav%}
+
+	{%block content%}
+
+<!-- Header -->
+			<header id="header">
+				<h1><a>RuleBook</a></h1>
+				<nav id="nav">
+					<ul>
+						{%if user.is_authenticated%}
+						<li> <a class="lead" href="{% url 'alert' %}">Due Returns</a> </li>
+						<li><p class="lead">{{user.username | upper }}</p></li>
+						{%else%}
+
+						<li><a href="{% url 'password_reset' %}" style="color:white;">Forgot Password</a></li>
+						<li><a href="{% url 'login' %}" style="text-decoration: none;">
+						Log In</a></li>
+						<li><a href="{% url 'signup' %}" style="text-decoration: none;">Sign up</a></li>
+						{%endif%}
+					</ul>
+				</nav>
+			</header>
+		<!-- Banner -->
+			<section id="banner">
+				<h2>Compliance RuleBook</h2>
+				<p>Staying On-Top in a Dynamic Regulatory Environment.</p>
+				{% if user.is_authenticated %}
+						<p class="lead">Hi {{user.username|title}}</p>
+				{%else%}
+				<ul class="actions">
+					<li>
+						<a href="{%url 'login' %}" class="button big" >Login</a>
+					</li>
+				</ul>
+				{%endif%}
+			</section>
+
+		<!-- One -->
+			<section id="one" class="wrapper style1 align-center ">
+				<div class="container">
+					<header>
+						<h2>Select Below Which Action to Take</h2>
+						<p><i> NB: Not All Rules Require Returns </i></p>
+					</header>
+					<div class="row 200%">
+						<section class="4u 12u$(small)">
+							<a href="{%url 'rule_list'%}" style="color:white" >
+								<i class="icon big rounded fa-clock-o"></i>
+							</a>
+							<h2>RuleBook with Returns</h2>
+						</section>
+						<section class="4u 12u$(small)">
+							<a href="{%url 'rulebook'%}" style="color:white">
+								<i class="icon big rounded fa-book"></i>
+							</a>
+							<h2>RuleBook Without Returns</h2>
+						</section>
+						<section class="4u$ 12u$(small)">
+							<a href="{%url 'upload_list'%}" style="color:white">
+								<i class="icon big rounded fa-upload"></i>
+							</a>
+							<h2>Upload Compliance</h2>
+						</section>
+					</div>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer class="p-3" id="footer">
+					<ul class="copyright">
+						<li>&copy; Fidelity Bank Compliance and Control</li>
+					</ul>
+			</footer>
+{%endblock content%}
+
+{%endblock div%}

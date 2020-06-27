@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+{%block title %} Log In {%endblock title %}
+
+{%block content %}
+
+<h1>Log In</h1>
+<form class="rd-mailform form-modern form-darker offset-top-40" method="post">
+    <div class="form-group">
+    {% csrf_token %}
+    {{ form |crispy }}
+    <button class="btn btn-success ml-2">Log In</button>
+    </div>
+    <a href="{% url 'home' %}">Forgot My Password</a>
+</form>
+{%endblock content %}
